@@ -1,22 +1,27 @@
 /**
- * Created by Milenca Ventura on 3/12/2015.
+ * Created by Milenca Ventura on 3/17/2015.
  */
 var numberOperators= function  ()
 
 {
+    var number= window.prompt("Introduce the values like this: 4,5,7");
+    //number=arguments;
+        var ser= number.split(",");
+        var real= [];
+        for ( var i= 0; i<ser.length;i++)
+        {
+            real[i] =parseInt(ser[i]) ;
 
-    var number=arguments;
+        };
 
-    console.log('the max is' + getMax(number));
-
-    console.log('the min is' + getMin(number));
-    //sum=0;
-    console.log('the avg is' + getAverage(number));
-   // sum1=0;
-    console.log('the sum is' + getSum(number));
+    alert('the max is' + getMax(number));
+    alert('the min is' + getMin(number));
+    alert('the avg is' + getAverage(number));
+    alert('the sum is' + getSum(number));
 
 };
 
+//numberOperators(number);
 var getMax=function(number,pos,max){
     // var max;
     if(max==undefined)
@@ -63,10 +68,8 @@ var getAverage=function(number,pos,avg){
         avg=number[pos-1];
         //var total=avg/aux;
     }
-
     return getAverage(number,pos-1,avg);
 };
-
 var getSum=function(number,pos,sum)
 {
     if(pos==undefined)
@@ -86,4 +89,3 @@ var getSum=function(number,pos,sum)
     return getSum(number,pos-1,sum);
 
 };
-//numberOperators(78,56,789,788);
