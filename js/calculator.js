@@ -1,156 +1,110 @@
-
-var oper="";
-var out="";
-var lsd="";
-var resa=false;
-
-function isNum(argvalue)
-{
-    argvalue=argvalue.toString();
-
-    if (argvalue.length==0)
-        return false;
-
-    for(var n=0; n<argvalue.length; n++)
-        if(argvalue.substring(n, n+1) < "0" || argvalue.substring(n, n+1) > "9")
-            return false;
-
-    return true;
-}
-
-
-function simpleCalc(ss,df)
-{
-    var result = "";
-    var ss = df.length;
-    var arg1 ="";
-    var arg2 = "";
-    var bol = true;
-
-    for(var c=0; c<ss; c++)
-    {
-        var digit=df.charAt(c);
-
-        if(isNum(digit))
-        {
-            if(bol==true)
-                arg1=arg1+digit.toString();
-
-            if(bol==false)
-                arg2=arg2+digit;
+//calculator add
+var Calculator= function(){
+    //pluss
+    var _resultAux=0;
+    this.add=function(var1, var2) {
+        if (var2 == undefined && !isNaN(var1)) {
+            _resultAux = _resultAux + var1;
+            return _resultAux;
+        };
+        if (isNaN(var1) || isNaN(var2)) {
+            throw('error numbers!');
         }
-        else
-        {
-            if(c==0 && digit=="-")
-                arg1=arg1+digit.toString();
-
-            else if(digit==".")
-            {
-                if(bol==true)
-                    arg1=arg1+digit.toString();
-                else
-                    arg2=arg2+digit.toString();
-            }
-            else
-            {
-                bol=false;
-                oper=digit;
-            }
+        ;
+        if (isNaN(var1) || var2 == undefined){
+            throw('error numbers!');
+        };
+        if (var1<0 || var2 < 0){
+            throw('error numbers!');
+        };
+        var res = false;
+        if(var1%1 !=0 || var2%1!=0){
+           res = true;
+            return res;
+        };
+        _resultAux = var1 + var2;
+        return _resultAux;
+    };
+    //minus
+    this.minus=function(var1, var2){
+        if (var2 == undefined && !isNaN(var1)) {
+            _resultAux = _resultAux - var1;
+            return _resultAux;
+        };
+        if (isNaN(var1) || isNaN(var2)) {
+            throw('error numbers!');
         }
-    }
+        ;
+        if (var1<0 || var2 < 0){
+            throw('error numbers!');
+        };
+        if(var1 < var2){
+            throw('The first number should be bigger');
+        };
+        return _resultAux =var1-var2;
+        var res = false;
+        if(var1%1 !=0 || var2%1!=0){
+            res = true;
+            return res;
+        };
+    };
 
-    if(oper=="" || oper==null)
-    {
-        out=arg1;
-        return arg1;
-    }
-    else if(arg2=="" || arg2==null)
-    {
-        out=arg1;
-        return arg1;
-    }
+    //plus
+    this.plus=function(var1, var2){
 
-    if(oper=="-")
-    {
-        var res=Math.round((parseFloat(arg1)-parseFloat(arg2))*10000)/10000;
-        result=res;
-        out=arg1+"-"+arg2+"="+res;
-    }
-    if(oper=="+")
-    {
-        var res=Math.round((parseFloat(arg1)+parseFloat(arg2))*10000)/10000;
-        result=res;
-        out=arg1+"+"+arg2+"="+res;
-    }
-    if(oper=="/")
-    {
-        var res=Math.round((parseFloat(arg1)/parseFloat(arg2))*10000)/10000;
-        result=res;
-        out=arg1+"/"+arg2+"="+res;
-    }
-    if(oper=="*")
-    {
-        var res=Math.round((parseFloat(arg1)*parseFloat(arg2))*10000)/10000;
-        result=res;
-        out=arg1+"*"+arg2+"="+res;
-    }
-    return result;
-}
-
-function change(name)
-{
-    var sd=name.value;
-    var df=document.calci.result.value;
-
-    if(sd=="C")
-    {
-        document.calci.result.value="";
-        df="";
-        out="clear data";
-    }
-    else if(sd=="=")
-    {
-        var res=simpleCalc(sd,df)
-        document.calci.result.value=res;
-        resa=true;
-    }
-    else if(sd!="")
-    {
-        if(df=="" || df==null)
-            document.calci.result.value=sd;
-
-        else
-        {
-            var cal=false;
-            if(isNaN(sd) && sd!=".")
-            {
-                for(var si=0; si<df.length; si++)
-                {
-                    var d=df.charAt(si);
-                    if(isNaN(d))
-                    {
-                        if(si==0 && d=="-"){}
-                        else
-                            cal=true;
-                    }
-                }
-            }
-
-            if(cal==true)
-            {
-                var res=simpleCalc("=",df)
-                document.calci.result.value=res+sd;
-                resa=false;
-            }
-            else
-            {
-                if(resa==true && !isNaN(sd))
-                    df="";
-
-                resa = false;
-                document.calci.result.value=df+sd;
-            }
+        if (var2 == undefined && !isNaN(var1)) {
+            _resultAux = _resultAux * var1;
+            return _resultAux;
+        };
+        if (isNaN(var1) || isNaN(var2)) {
+            throw('error numbers!');
         }
-    }
-    lsd=sd;
-}
+        ;
+        if (var1<0 || var2 < 0){
+            throw('error numbers!');
+        };
+        var res = false;
+        if(var1%1 !=0 || var2%1!=0){
+            res = true;
+            return res;
+        };
+        return _resultAux = var1*var2;
+    };
+
+
+    //division
+    this.div=function(var1, var2){
+        if (var2 == undefined && !isNaN(var1)) {
+            _resultAux = _resultAux - var1;
+            return _resultAux;
+        };
+        if (isNaN(var1) || isNaN(var2)) {
+            throw('error numbers!');
+        }
+        ;
+        if(var1 == undefined || var2==0 ){
+            throw('error division by zero!');
+        };
+        if (var1<0 || var2 < 0){
+            throw('error numbers!');
+        };
+        return _resultAux = var1/var2;
+        var res = false;
+        if(var1%1 ==0 || var2%1==0){
+            res = true;
+            return res;
+        };
+    };
+
+    //subtract a bigger number to small number
+    /*this.subtractBiggerSmallNumber=function(var1,var2){
+     if(var1>var2)
+     {
+     return console.log('the first number should be more than bigger that second number');
+     }
+     else{
+     return var1-var2;
+     }
+     };*/
+};
+
